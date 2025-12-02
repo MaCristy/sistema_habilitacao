@@ -10,7 +10,7 @@ class Habilitacao:
     _id_counter = 1  #contador estático para gerar IDs automáticos
 
     def __init__(self, nome_completo,primeira_habilitacao, data_nascimento,
-    local_nascimento, uf_nascimento, data_emissao, validade, acc, identidade, org_emissor, uf_identidade, cpf, numero_registro, categoria, nacionalidade, filiacao):
+    local_nascimento, uf_nascimento, data_emissao, validade, acc, identidade, org_emissor, uf_identidade, cpf, numero_registro, categoria, nacionalidade, filiacao, foto=None):
         self.id = Habilitacao._id_counter
         self.nome_completo = nome_completo
         self.primeira_habilitacao = primeira_habilitacao
@@ -28,6 +28,7 @@ class Habilitacao:
         self.categoria = categoria
         self.nacionalidade = nacionalidade
         self.filiacao = filiacao
+        self.foto = foto  # Caminho para a foto da habilitação
         Habilitacao._id_counter += 1
 
     #
@@ -49,7 +50,8 @@ class Habilitacao:
             ("numero_registro", self.numero_registro),
             ("categoria", self.categoria),
             ("nacionalidade", self.nacionalidade),
-            ("filiacao", self.filiacao)
+            ("filiacao", self.filiacao),
+             ("foto", self.foto)
         ])
 
 
@@ -100,7 +102,8 @@ def _carregar_db():
                         numero_registro=item.get("numero_registro"),
                         categoria=item.get("categoria"),
                         nacionalidade=item.get("nacionalidade"),
-                        filiacao=item.get("filiacao")
+                        filiacao=item.get("filiacao"),
+                        foto=item.get("foto"),
                     )
                     h.id = item.get("id", 0)
                     habilitacoes.append(h)

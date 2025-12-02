@@ -34,10 +34,20 @@ def adicionar_habilitacao(dados):
         numero_registro=dados["numero_registro"],
         categoria=dados["categoria"],
         nacionalidade=dados["nacionalidade"],
-        filiacao=dados["filiacao"]
+        filiacao=dados["filiacao"],
+        foto=None
     )
 
     return models.adicionar(habilitacao)
+
+
+def adicionar_foto(habilitacao_id, caminho_foto):
+    h = models.buscar_por_id(habilitacao_id)
+    if not h:
+        raise IndexError("Habilitação não encontrada.")
+
+    h.foto = caminho_foto
+    return h.to_dict()
 
 
 def atualizar_habilitacao(habilitacao_id, dados):
